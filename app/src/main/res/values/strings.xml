@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Cannaguide</string>
+    <string name="intake_log">Intake Log</string>
+    <string name="amount_consumed">Amount Consumed</string>
+    <string name="amount_consumed_eg">Eg. 1 joint</string>
+    <string name="intake_method">Intake Method</string>
+    <string name="select_date">Select Date</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="intake_date">Intake Date</string>
+    <string name="add_intake_log">Add Intake Log</string>
+    <string name="edit_intake_log">Edit Intake Log</string>
+    <string name="intake_time">Intake Time</string>
+    <string name="no_entry_added_yet">No entry added yet.</string>
+    <string name="button_continue">Continue</string>
+    <string name="at">%1$s at %2$s</string>
+    <string name="gms_consumed_via">%1$s, %2$s</string>
+    <string name="confirm_delete">Confirm Delete</string>
+    <string name="are_you_sure_you_want_to_delete_this_entry">Are you sure you want to delete this entry?</string>
+    <string name="home">Home</string>
+    <string name="intake_method_eg">Eg. Smoking</string>
+</resources>
