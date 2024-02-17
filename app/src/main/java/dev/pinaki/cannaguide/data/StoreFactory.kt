@@ -2,6 +2,7 @@ package dev.pinaki.cannaguide.data
 
 import androidx.room.Room
 import dev.pinaki.cannaguide.CannaguideApp
+import dev.pinaki.cannaguide.data.store.PrimaryEmotionsStore
 
 object StoreFactory {
     val db by lazy {
@@ -12,4 +13,6 @@ object StoreFactory {
     }
 
     val intakeStore get() = db.intakeEntryStore()
+    val primaryEmotionsStore get() = PrimaryEmotionsStore()
+    val moodEntryStore get() = db.moodEntryStore()
 }
