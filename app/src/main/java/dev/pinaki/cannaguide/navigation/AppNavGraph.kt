@@ -2,7 +2,6 @@ package dev.pinaki.cannaguide.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -14,7 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import androidx.navigation.navigation
+import androidx.paging.compose.collectAsLazyPagingItems
 import dev.pinaki.cannaguide.data.store.IntakeEntry
 import dev.pinaki.cannaguide.data.store.MoodEntry
 import dev.pinaki.cannaguide.feature.intakeentry.EditIntakeEntryViewModel
@@ -38,9 +37,9 @@ fun AppNavGraph(
             val vm = viewModel<HomeViewModel>(initializer = {
                 HomeViewModel()
             })
-            val state = vm.state.collectAsState()
+            val entries = vm.entries.collectAsLazyPagingItems()
             HomeScreen(
-                state = state.value,
+                state = entries,
                 addEntry = {
                     navController.navigate("intake/add")
                 },

@@ -26,7 +26,7 @@ data class MoodEntry(
 @Dao
 interface MoodEntryStore : BaseDao<MoodEntry> {
     @Query("select * from mood_entry order by date DESC limit :limit offset :offset")
-    fun getEntries(limit: Int, offset: Int): Flow<List<MoodEntry>>
+    suspend fun getEntries(limit: Int, offset: Int): List<MoodEntry>
 
     @Query("select * from mood_entry where id=:id")
     suspend fun findById(id: Int): MoodEntry

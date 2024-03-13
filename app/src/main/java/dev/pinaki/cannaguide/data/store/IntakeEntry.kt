@@ -31,5 +31,5 @@ interface IntakeEntryStore : BaseDao<IntakeEntry> {
     suspend fun findById(id: Int): IntakeEntry?
 
     @Query("select * from intake_entry order by date DESC limit :limit offset :offset")
-    fun getEntries(limit: Int, offset: Int): Flow<List<IntakeEntry>>
+    suspend fun getEntries(limit: Int, offset: Int): List<IntakeEntry>
 }

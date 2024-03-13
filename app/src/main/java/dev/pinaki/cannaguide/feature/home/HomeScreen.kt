@@ -1,20 +1,19 @@
 package dev.pinaki.cannaguide.feature.home
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -32,6 +31,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
 import dev.pinaki.cannaguide.R
 import dev.pinaki.cannaguide.data.store.IntakeEntry
 import dev.pinaki.cannaguide.data.store.JournalEntry
@@ -39,17 +40,15 @@ import dev.pinaki.cannaguide.data.store.MoodEntry
 import dev.pinaki.cannaguide.di.rememberCommonDateFormatter
 import dev.pinaki.cannaguide.di.rememberCommonTimeFormatter
 import dev.pinaki.cannaguide.feature.moodtracker.rememberEmotionToMoodMapper
-import dev.pinaki.cannaguide.paging.PagedLazyColumn
 import dev.pinaki.cannaguide.ui.component.EmptyContent
 import dev.pinaki.cannaguide.ui.component.FullScreenLoader
 import dev.pinaki.cannaguide.ui.component.HSpacer16
 import dev.pinaki.cannaguide.ui.component.JournalEntryComponent
-import dev.pinaki.cannaguide.util.ID_NO_ENTRY
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    state: HomeScreenState,
+    state: LazyPagingItems<JournalEntry>,
     addEntry: () -> Unit,
     addMood: () -> Unit,
     editEntry: (JournalEntry) -> Unit,
@@ -130,19 +129,18 @@ fun HomeScreen(
             }
         }
 
-        if (state.loading) {
+        if (state.loadState.refresh == LoadState.Loading) {
             FullScreenLoader(modifier = Modifier.padding(paddingValues))
-        } else if (state.entries.isEmpty()) {
+        } else if (state.itemCount == 0) {
             EmptyContent(stringResource(R.string.no_entry_added_yet))
         } else {
-            PagedLazyColumn(
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(paddingValues),
-                loadMore = loadMore,
             ) {
                 items(
-                    items = state.entries,
+                    items = state.itemSnapshotList,
                 ) { entry ->
                     val timeFormatter = rememberCommonTimeFormatter()
                     val dateFormatter = rememberCommonDateFormatter()
@@ -198,6 +196,10 @@ fun HomeScreen(
                                     timeFormatter.format(entry.entryDate)
                                 )
                             )
+                        }
+
+                        null -> {
+
                         }
                     }
                     Divider()
