@@ -52,7 +52,6 @@ fun HomeScreen(
     addEntry: () -> Unit,
     addMood: () -> Unit,
     editEntry: (JournalEntry) -> Unit,
-    loadMore: () -> Unit,
 ) {
     var showOptionsBottomSheet by remember {
         mutableStateOf(false)

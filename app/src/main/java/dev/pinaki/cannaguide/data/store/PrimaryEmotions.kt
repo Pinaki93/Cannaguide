@@ -18,15 +18,6 @@ enum class PrimaryEmotion(val emoji: String) {
 
     companion object {
         fun find(emoji: String) = entries.first { it.emoji == emoji }
-
-        val Saver = run {
-            val nameKey = "emoji"
-            val countryKey = "Country"
-            mapSaver(
-                save = { mapOf(nameKey to it.emoji) },
-                restore = { PrimaryEmotion.find(nameKey) }
-            )
-        }
     }
 
 }
