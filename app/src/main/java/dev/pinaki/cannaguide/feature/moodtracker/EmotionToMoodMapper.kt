@@ -20,6 +20,7 @@ class EmotionToMoodMapper(
             PrimaryEmotion.SURPRISE -> application.getString(R.string.surprise_description)
             PrimaryEmotion.DISGUST -> application.getString(R.string.disgust_description)
             PrimaryEmotion.SHAME -> application.getString(R.string.shame_description)
+            PrimaryEmotion.BOREDOM -> application.getString(R.string.boredom_description)
         }
     }
 

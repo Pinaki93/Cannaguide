@@ -13,6 +13,7 @@ enum class PrimaryEmotion(val emoji: String) {
     INTEREST("😊"),
     SURPRISE("😮"),
     DISGUST("🤢"),
+    BOREDOM("\uD83D\uDE12"),
     SHAME("😳");
 
     companion object {

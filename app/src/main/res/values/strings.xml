@@ -29,6 +29,7 @@
     <string name="surprise_description">Surprise</string>
     <string name="disgust_description">Disgust</string>
     <string name="shame_description">Shame</string>
+    <string name="boredom_description">Boredom</string>
     <string name="please_select_a_mood">Please select a mood</string>
     <string name="select_an_emotion">Select an emotion</string>
 </resources>
